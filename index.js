@@ -51,7 +51,7 @@ app.get('/books', (req, res) => {
         }
         const books = JSON.parse(data);
         res.render('books', {
-            title: 'Books List',
+            title: 'List of books',
             books
         });
     });
