@@ -1,8 +1,14 @@
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
+const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
+// We can can get json data from the client
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main',
 }));
@@ -10,6 +16,9 @@ app.engine('handlebars', exphbs.engine({
 app.set('view engine', 'handlebars');
 // static files
 app.use(express.static('public'));
+
+// My array
+
 
 // HOME
 app.get('/', (req, res) => {
@@ -24,8 +33,29 @@ app.get('/about', (req, res) => {
         title: 'About this page'
     });
 });
-
-
+/*
+var obj;
+fs.readFile('file', 'utf8', function (err, data) {
+    if (err) throw err;
+    obj = JSON.parse(data);
+});
+*/
+// BOOKS 
+app.get('/books', (req, res) => {
+    const filePath = path.join(__dirname, 'data', 'books.json');
+    
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+            console.error('Error reading books.json:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        const books = JSON.parse(data);
+        res.render('books', {
+            title: 'Books List',
+            books
+        });
+    });
+});
 
 // Page not found 404
 app.use((req, res) => {
