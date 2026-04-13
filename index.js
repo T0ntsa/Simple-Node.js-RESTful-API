@@ -23,7 +23,7 @@ app.use(express.static('public'));
 // HOME
 app.get('/', (req, res) => {
     res.render('index', {
-        title: 'This is title'
+        title: 'Simple Node.js RESTful API'
     });
 });
 
@@ -33,13 +33,15 @@ app.get('/about', (req, res) => {
         title: 'About this page'
     });
 });
-/*
-var obj;
-fs.readFile('file', 'utf8', function (err, data) {
-    if (err) throw err;
-    obj = JSON.parse(data);
-});
-*/
+
+
+// // https://stackoverflow.com/questions/10011011/how-do-i-read-a-json-file-into-server-memory
+// var obj;
+// fs.readFile('file', 'utf8', function (err, data) {
+//     if (err) throw err;
+//     obj = JSON.parse(data);
+// });
+
 // BOOKS 
 app.get('/books', (req, res) => {
     const filePath = path.join(__dirname, 'data', 'books.json');
