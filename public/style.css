@@ -1,57 +1,7 @@
-/* body {
+body {
     font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #f0f0f0;
-}
-
-.book-list {
-    list-style: none;   
-    padding-left: 0;    
-    margin-left: 0;
-}
-
-.book {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px;
-    background-color: #f9f9f9;
-} */
-
-:root{
-    --bg: #f5f7fb;
-    --surface: #ffffff;
-    --text: #111827;
-    --muted: #6b7280;
-    --border: #e5e7eb;
-    --accent: #4f46e5;
-    --shadow: 0 10px 25px rgba(17, 24, 39, 0.08);
-}
-
-* { box-sizing: border-box; }
-
-body {
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    margin: 0;
-    background: radial-gradient(1200px 600px at 20% 0%, #eef2ff 0%, var(--bg) 60%);
-    color: var(--text);
-}
-
-.container{
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 28px 18px 48px;
-}
-
-h1{
-    margin: 0 0 16px;
-    font-size: 2rem;
-    letter-spacing: -0.02em;
-}
-
-.subtitle{
-    margin: 0 0 22px;
-    color: var(--muted);
 }
 
 .book-list {
@@ -60,44 +10,23 @@ h1{
     margin: 0;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 14px;
 }
-
 .book {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px 16px 14px;
-    box-shadow: 0 1px 0 rgba(17, 24, 39, 0.03);
-    transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    background-color: #f9f9f9;
+} 
+.book:hover {
+    transform: scale(1.03);              /* make the card a bit bigger */
+    box-shadow: 0 8px 20px rgba(0,0,0,.2); /* add a clear shadow */
+    border-color: royalblue;             /* highlight border */
 }
-
-.book:hover{
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
-    border-color: rgba(79, 70, 229, 0.25);
-}
-
-.book-title{
-    font-weight: 700;
-    font-size: 1.05rem;
-    line-height: 1.25;
-    margin: 0 0 6px;
-}
-
-.book-author{
-    margin: 0;
-    color: var(--muted);
-}
-
-.book-meta{
-    margin: 10px 0 0;
-    color: var(--muted);
-    line-height: 1.4;
-}
-
-.meta-label{
-    color: var(--text);
-    font-weight: 600;
+.container{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 28px 18px 48px;
 }
