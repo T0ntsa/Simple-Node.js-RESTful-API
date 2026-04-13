@@ -1,10 +1,32 @@
-<h1>Books List</h1>
+{{!-- <h1>Books List</h1>
 
-<p>List of all the books in array
-    <ul>
+<p>List of all the books in array</p>
+<ul class="book-list">
+    {{#each books}}
+    <li class="book"><b>{{this.title}}</b> by {{this.author}}<br> 
+        Published: {{this.published}}<br>
+        Genre: {{this.genre}}</li>
+    {{/each}}
+</ul>
+End of the list --}}
+
+<div class="container">
+    <h1>{{title}}</h1>
+    <p class="subtitle">Your current collection</p>
+
+    <ul class="book-list">
         {{#each books}}
-        <li>{{this.title}} by {{this.author}}</li>
+        <li class="book">
+            <h2 class="book-title">{{this.title}}</h2>
+            <p class="book-author">{{this.author}}</p>
+
+            <p class="book-meta">
+            <span class="meta-label">Book ID:</span> {{this.id}}<br>
+            <span class="meta-label">Published:</span> {{this.published}}<br>
+            <span class="meta-label">Category:</span> {{this.genre}}
+            </p>
+
+        </li>
         {{/each}}
     </ul>
-    End of the list
-</p>
+</div>
