@@ -125,9 +125,73 @@ app.post('/api/books', (req, res) => {
     });
 });
 
+// UPDATE
+app.patch('/api/books/:id', (req, res) => {
+    const id = Number(req.params.id);
+    const filePath = path.join(__dirname, 'data', 'books.json');
 
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        let books = JSON.parse(data);
+        const book = books.find(book => book.id === id);
 
+        if (book) {
+            books.forEach(book => {
+                if (book.id===id) {
+                    book.title = req.body.title,
+                    book.author = req.body.author,
+                    book.published = req.body.published,
+                    book.genre = req.body.genre
+                }
+            }); // end of foreach
+            const updatedBook = {
+                id,
+                title: req.body.title,
+                author: req.body.author,
+                published: req.body.published,
+                genre: req.body.genre
+            }
+            res.status(200).json(books, updatedBook);
+        }
+        else {
+            res.status(404).json({
+                msg: 'Could not update'
+            })
+        }
+        
+    }); // END OF fs.readFile
+}); // END OF app.patch
 
+// DELETE by ID
+app.delete('/api/books/:id', (req,res) => {
+    const idToDelete = Number(req.params.id);
+    const filePath = path.join(__dirname, 'data', 'books.json');
+
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        let books = JSON.parse(data);
+        // First check that can the deleted product be found
+        const book = books.find(book => book.id === idToDelete);
+
+        if (book) {
+            books = books.filter(book => book.id !== idToDelete);
+            // writeFile HERE TO ACTUALLY ADD TO JSON
+            res.status(200).json({
+                id: idToDelete,
+                msg: `'${book.title}' by '${book.author}' has been deleted succesfully`
+            });
+        }
+        else {
+        return res.status(404).json({
+            msg: 'could not find the product'
+        });
+        }
+    }); // END OF readFile
+});
 
 // Page not found 404
 app.use((req, res) => {
