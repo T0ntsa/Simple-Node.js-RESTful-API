@@ -92,6 +92,42 @@ app.get('/api/books/:id', (req, res) => {
     });
 });
 
+// Create a book (you can send the values using Postman) 
+app.post('/api/books', (req, res) => {
+    const filePath = path.join(__dirname, 'data', 'books.json');
+
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        const books = JSON.parse(data);
+
+        if (req.body.title && req.body.author && req.body.published && req.body.genre) {
+        const newID = books.length ? books[books.length - 1].id + 1 : 1;
+
+        const newBook = {
+            id: newID,
+            title: req.body.title,
+            author: req.body.author,
+            published: req.body.published,
+            genre: req.body.genre
+        };
+
+        books.push(newBook);
+
+        return res.status(201).json(books, newBook);
+        } else {
+        return res.status(400).json({
+            msg: 'title, author, published and genre needed'
+        });
+        }
+    });
+});
+
+
+
+
 
 // Page not found 404
 app.use((req, res) => {
