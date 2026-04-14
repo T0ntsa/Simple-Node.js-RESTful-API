@@ -104,7 +104,7 @@ app.post('/api/books', (req, res) => {
         const books = JSON.parse(data);
 
         if (req.body.title && req.body.author && req.body.published && req.body.genre) {
-        const newID = books.length ? books[books.length - 1].id + 1 : 1;
+        const newID = books[books.length-1].id + 1;
 
         const newBook = {
             id: newID,
