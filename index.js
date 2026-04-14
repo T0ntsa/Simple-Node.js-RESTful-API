@@ -71,20 +71,25 @@ app.get('/api/books', (req, res) => {
 });
 // API endpoint to get a single book by ID
 app.get('/api/books/:id', (req, res) => {
-    const id = req.params.id;
+        const id = Number(req.params.id);
 
-    const book = books.find(book => book.id === id);
-    // ERROR
-    // ReferenceError: books is not defined
-    // ERROR
-    if (book) {
-        res.json(book)
-    }
-    else {
-        res.status(404).json({
-            msg: 'Not found'
-        })
-    }
+        const filePath = path.join(__dirname, 'data', 'books.json');
+        fs.readFile(filePath, 'utf-8', (err, data) => {
+            if (err) {
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+        const books = JSON.parse(data);
+        const book = books.find(book => book.id === id);
+
+        if (book) {
+            res.json(book)
+        }
+        else {
+            res.status(404).json({
+                msg: 'Not found'
+            });
+        }
+    });
 });
 
 
