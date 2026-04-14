@@ -42,7 +42,7 @@ app.get('/about', (req, res) => {
 //     obj = JSON.parse(data);
 // });
 
-// BOOKS 
+// SHOW ALL THE BOOKS 
 app.get('/books', (req, res) => {
     const filePath = path.join(__dirname, 'data', 'books.json');
     
@@ -59,9 +59,39 @@ app.get('/books', (req, res) => {
     });
 });
 
+// API endpoint to get all books as JSON
+app.get('/api/books', (req, res) => {
+    const filePath = path.join(__dirname, 'data', 'books.json');
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        res.json(JSON.parse(data));
+    });
+});
+// API endpoint to get a single book by ID
+app.get('/api/books/:id', (req, res) => {
+    const id = req.params.id;
+
+    const book = books.find(book => book.id === id);
+    // ERROR
+    // ReferenceError: books is not defined
+    // ERROR
+    if (book) {
+        res.json(book)
+    }
+    else {
+        res.status(404).json({
+            msg: 'Not found'
+        })
+    }
+});
+
+
 // Page not found 404
 app.use((req, res) => {
-    res.status(404).send(`Page ${req.host}<b>${req.originalUrl}</b> not found. <a href="/">Homepage</a>`);
+    // The magic of backticks ;)
+    res.status(404).send(`Page ${req.host}<b>${req.originalUrl}</b> not found.<br><br><a href="/">Homepage</a>`);
     // Log to see what was the original URL that caused the 404 error
     console.log(`404 error: ${req.originalUrl} not found`);
 });

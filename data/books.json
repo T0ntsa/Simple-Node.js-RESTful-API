@@ -3,35 +3,35 @@
         "id": 1,
         "title": "EpileptiKKo",
         "author": "David B.",
-        "published": "2013",
+        "published": 2013,
         "genre": "autobiography"
     },
     {
         "id": 2,
         "title": "En koskaan pitänyt sinusta",
         "author": "Chester Brown",
-        "published": "2012",
+        "published": 2012,
         "genre": "autobiography"
     },
     {
         "id": 3,
         "title": "Madonreikiä",
         "author": "Maria Björklund",
-        "published": "2014",
+        "published": 2014,
         "genre": "novel"
     },
     {
         "id": 4,
         "title": "Aarne ankka",
         "author": "Charlie Christensen",
-        "published": "2017",
+        "published": 2017,
         "genre": "comic"
     },
     {
         "id": 5,
         "title": "Sontaa",
         "author": "Ulla Donner",
-        "published": "2019",
+        "published": 2019,
         "genre": "novel"
     }
 ]
